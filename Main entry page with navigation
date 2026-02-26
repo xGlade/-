@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dota 2 Statistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-fire"></i>
+                <span>Dota 2 Stats</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#/" class="nav-link active" data-page="home">
+                    <i class="fas fa-home"></i> Главная
+                </a></li>
+                <li><a href="#/heroes" class="nav-link" data-page="heroes">
+                    <i class="fas fa-users"></i> Герои
+                </a></li>
+                <li><a href="#/meta" class="nav-link" data-page="meta">
+                    <i class="fas fa-chart-line"></i> Мета
+                </a></li>
+                <li><a href="#/items" class="nav-link" data-page="items">
+                    <i class="fas fa-shopping-bag"></i> Предметы
+                </a></li>
+                <li><a href="#/pro" class="nav-link" data-page="pro">
+                    <i class="fas fa-trophy"></i> Про-игроки
+                </a></li>
+            </ul>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Dota 2 Stats</span>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-content">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Загрузка...</p>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> О проекте</h3>
+                <p>Dota 2 Statistics предоставляет актуальную статистику по игре Dota 2. Использует OpenDota API.</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-external-link-alt"></i> Ссылки</h3>
+                <ul>
+                    <li><a href="https://www.opendota.com/" target="_blank">OpenDota</a></li>
+                    <li><a href="https://www.dota2.com/" target="_blank">Официальный сайт Dota 2</a></li>
+                    <li><a href="https://stratz.com/" target="_blank">STRATZ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-code"></i> Технологии</h3>
+                <p>HTML5, CSS3, JavaScript, OpenDota API</p>
+                <p>Данные обновляются автоматически</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 Dota 2 Statistics. Неофициальный сайт. Все права на Dota 2 принадлежат Valve Corporation.</p>
+        </div>
+    </footer>
+
+    <script src="router.js"></script>
+</body>
+</html>
