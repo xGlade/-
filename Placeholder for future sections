@@ -1,0 +1,27 @@
+<div class="coming-soon" style="text-align: center; padding: 60px 20px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <i class="fas fa-tools" style="font-size: 80px; color: #f9675a; margin-bottom: 30px;"></i>
+        <h2 style="color: #f9675a; font-size: 3rem; margin-bottom: 20px;">Страница в разработке</h2>
+        <p style="color: #8a94b3; font-size: 1.2rem; margin-bottom: 40px;">Данный раздел находится в разработке и будет доступен в ближайшее время.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
+            <div style="background: rgba(28, 32, 48, 0.8); padding: 30px; border-radius: 15px; border: 1px solid #2a2f45;">
+                <i class="fas fa-chart-line" style="font-size: 40px; color: #f9675a; margin-bottom: 20px;"></i>
+                <h3 style="color: #e1e3ef; margin-bottom: 15px;">Мета статистика</h3>
+                <p style="color: #8a94b3;">Актуальная информация о текущей мете, топовые герои и сборки.</p>
+            </div>
+            
+            <div style="background: rgba(28, 32, 48, 0.8); padding: 30px; border-radius: 15px; border: 1px solid #2a2f45;">
+                <i class="fas fa-shopping-bag" style="font-size: 40px; color: #f9675a; margin-bottom: 20px;"></i>
+                <h3 style="color: #e1e3ef; margin-bottom: 15px;">Предметы</h3>
+                <p style="color: #8a94b3;">Полная информация о всех предметах Dota 2, популярные сборки.</p>
+            </div>
+            
+            <div style="background: rgba(28, 32, 48, 0.8); padding: 30px; border-radius: 15px; border: 1px solid #2a2f45;">
+                <i class="fas fa-trophy" style="font-size: 40px; color: #f9675a; margin-bottom: 20px;"></i>
+                <h3 style="color: #e1e3ef; margin-bottom: 15px;">Про-игроки</h3>
+                <p style="color: #8a94b3;">Статистика профессиональных игроков, их герои и достижения.</p>
+            </div>
+        </div>
+    </div>
+</div>
