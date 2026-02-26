@@ -1,4 +1,4 @@
-/* Общие стили */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ body {
     flex-direction: column;
 }
 
-/* Навигация */
+
 .main-nav {
     background: rgba(16, 20, 31, 0.95);
     backdrop-filter: blur(10px);
