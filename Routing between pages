@@ -1,0 +1,131 @@
+// Маршрутизатор для SPA
+class Router {
+    constructor() {
+        this.routes = {
+            '/': 'home.html',
+            '/heroes': 'heroes.html',
+            '/meta': 'coming-soon.html',
+            '/items': 'coming-soon.html',
+            '/pro': 'coming-soon.html'
+        };
+        
+        this.currentPage = 'home';
+        this.init();
+    }
+    
+    init() {
+        // Обработчик изменения хэша в URL
+        window.addEventListener('hashchange', () => this.loadPage());
+        
+        // Обработчик загрузки страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            this.loadPage();
+            this.setupNavigation();
+        });
+    }
+    
+    setupNavigation() {
+        // Обработчики кликов по навигации
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                this.navigateTo(page);
+            });
+        });
+    }
+    
+    navigateTo(page) {
+        // Обновляем URL без перезагрузки
+        window.location.hash = `/${page === 'home' ? '' : page}`;
+    }
+    
+    async loadPage() {
+        const hash = window.location.hash.slice(1) || '/';
+        const pageFile = this.routes[hash] || '404.html';
+        
+        // Обновляем активную ссылку в навигации
+        this.updateActiveLink(hash);
+        
+        try {
+            // Показываем загрузку
+            document.getElementById('app-content').innerHTML = `
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <p>Загрузка...</p>
+                </div>
+            `;
+            
+            // Загружаем страницу
+            const response = await fetch(pageFile);
+            if (!response.ok) throw new Error('Страница не найдена');
+            const html = await response.text();
+            
+            // Вставляем контент
+            document.getElementById('app-content').innerHTML = html;
+            
+            // Загружаем скрипт для страницы
+            await this.loadPageScript(pageFile);
+            
+        } catch (error) {
+            console.error('Ошибка загрузки страницы:', error);
+            document.getElementById('app-content').innerHTML = `
+                <div class="error-page" style="text-align: center; padding: 60px;">
+                    <h2 style="color: #f9675a;">Ошибка загрузки страницы</h2>
+                    <p style="color: #8a94b3;">${error.message}</p>
+                    <button onclick="window.location.hash='/'" style="margin-top: 20px; padding: 10px 20px; background: linear-gradient(135deg, #f9675a 0%, #e53e3e 100%); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        На главную
+                    </button>
+                </div>
+            `;
+        }
+    }
+    
+    updateActiveLink(hash) {
+        // Убираем активный класс у всех ссылок
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Определяем, какая страница активна
+        let page = 'home';
+        if (hash === '/heroes') page = 'heroes';
+        else if (hash === '/meta') page = 'meta';
+        else if (hash === '/items') page = 'items';
+        else if (hash === '/pro') page = 'pro';
+        
+        // Добавляем активный класс текущей ссылке
+        const activeLink = document.querySelector(`.nav-link[data-page="${page}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    
+    async loadPageScript(pageFile) {
+        const scriptMap = {
+            'home.html': 'home.js',
+            'heroes.html': 'heroes.js'
+        };
+        
+        const scriptFile = scriptMap[pageFile];
+        
+        if (scriptFile) {
+            try {
+                // Удаляем старый скрипт, если есть
+                const oldScript = document.querySelector(`script[data-page-script="${scriptFile}"]`);
+                if (oldScript) oldScript.remove();
+                
+                // Загружаем новый скрипт
+                const script = document.createElement('script');
+                script.src = scriptFile;
+                script.setAttribute('data-page-script', scriptFile);
+                document.body.appendChild(script);
+            } catch (error) {
+                console.error('Ошибка загрузки скрипта:', error);
+            }
+        }
+    }
+}
+
+// Инициализация роутера
+const router = new Router();
