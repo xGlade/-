@@ -1,4 +1,3 @@
-// Маршрутизатор для SPA
 class Router {
     constructor() {
         this.routes = {
@@ -14,10 +13,8 @@ class Router {
     }
     
     init() {
-        // Обработчик изменения хэша в URL
         window.addEventListener('hashchange', () => this.loadPage());
         
-        // Обработчик загрузки страницы
         window.addEventListener('DOMContentLoaded', () => {
             this.loadPage();
             this.setupNavigation();
@@ -25,7 +22,7 @@ class Router {
     }
     
     setupNavigation() {
-        // Обработчики кликов по навигации
+        
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -36,7 +33,7 @@ class Router {
     }
     
     navigateTo(page) {
-        // Обновляем URL без перезагрузки
+        
         window.location.hash = `/${page === 'home' ? '' : page}`;
     }
     
@@ -44,11 +41,11 @@ class Router {
         const hash = window.location.hash.slice(1) || '/';
         const pageFile = this.routes[hash] || '404.html';
         
-        // Обновляем активную ссылку в навигации
+        
         this.updateActiveLink(hash);
         
         try {
-            // Показываем загрузку
+           
             document.getElementById('app-content').innerHTML = `
                 <div class="loading-container">
                     <div class="spinner"></div>
@@ -56,15 +53,15 @@ class Router {
                 </div>
             `;
             
-            // Загружаем страницу
+            
             const response = await fetch(pageFile);
             if (!response.ok) throw new Error('Страница не найдена');
             const html = await response.text();
             
-            // Вставляем контент
+            
             document.getElementById('app-content').innerHTML = html;
             
-            // Загружаем скрипт для страницы
+            
             await this.loadPageScript(pageFile);
             
         } catch (error) {
@@ -82,19 +79,18 @@ class Router {
     }
     
     updateActiveLink(hash) {
-        // Убираем активный класс у всех ссылок
+        
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
         });
         
-        // Определяем, какая страница активна
+        
         let page = 'home';
         if (hash === '/heroes') page = 'heroes';
         else if (hash === '/meta') page = 'meta';
         else if (hash === '/items') page = 'items';
         else if (hash === '/pro') page = 'pro';
         
-        // Добавляем активный класс текущей ссылке
         const activeLink = document.querySelector(`.nav-link[data-page="${page}"]`);
         if (activeLink) {
             activeLink.classList.add('active');
@@ -111,11 +107,11 @@ class Router {
         
         if (scriptFile) {
             try {
-                // Удаляем старый скрипт, если есть
+                
                 const oldScript = document.querySelector(`script[data-page-script="${scriptFile}"]`);
                 if (oldScript) oldScript.remove();
                 
-                // Загружаем новый скрипт
+                
                 const script = document.createElement('script');
                 script.src = scriptFile;
                 script.setAttribute('data-page-script', scriptFile);
@@ -127,5 +123,4 @@ class Router {
     }
 }
 
-// Инициализация роутера
 const router = new Router();
